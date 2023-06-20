@@ -28,11 +28,14 @@ db.connect((err) => {
     }
 })
 
-app.use(bodyParser.json());
-
-
-app.get('/', (req, res) => {
-    res.send("teste");
+app.get('/', async (req, res) => {
+    const sql = 'Select * from email';
+    await db.query(sql, (err, result) => {
+        if (err) {
+            throw err;
+          }
+          res.send(result)
+    })
 })
 
 app.post('/email', (req, res) => {
