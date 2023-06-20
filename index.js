@@ -30,6 +30,11 @@ db.connect((err) => {
 
 app.use(bodyParser.json());
 
+
+app.get('/', (req, res) => {
+    res.send("teste");
+})
+
 app.post('/email', (req, res) => {
     const { nome, email, telefone, mensagem } = req.body;
     console.log(nome, email, telefone, mensagem)
