@@ -2,16 +2,21 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 require('dotenv').config();
+const cors = require('cors')
+
+
 
 const MYSQL_USER = process.env.MYSQL_USER
 
 const app = express();
 const port = 5000;
 
+app.use(cors())
+
 const db = mysql.createConnection({
     host: 'localhost',
-    user: MYSQL_USER,
-    password: 'soft1973824650',
+    user: "root",
+    password: 'soft@1973',
     database: 'emails'
 })
 
