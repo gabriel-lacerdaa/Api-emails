@@ -39,15 +39,14 @@ app.get('/', (req, res) => {
 });
 
 app.post('/email', (req, res) => {
-  const { nome, email, telefone, mensagem } = req.body;
-  console.log(nome, email, telefone, mensagem);
-  const sql = 'INSERT INTO email (nome, email, telefone, mensagem) VALUES (?, ?, ?, ?)';
-  const values = [nome, email, telefone, mensagem];
+  const { nome, email, telefone, mensagem, quem_enviou } = req.body;
+  const sql = 'INSERT INTO email (nome, email, telefone, mensagem, data_e_hora, site_que_enviou) VALUES (?, ?, ?, ?, ?, ?)';
+  const data_e_hora = new Date()
+  const values = [nome, email, telefone, mensagem, data_e_hora, quem_enviou];
   db.query(sql, values, (err, result) => {
     if (err) {
       throw err;
     }
-    console.log('Email salvo no banco de dados!');
     res.status(200).send('Email salvo com sucesso!!');
   });
 });
