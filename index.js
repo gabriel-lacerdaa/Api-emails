@@ -29,7 +29,11 @@ db.connect((err) => {
 });
 
 app.get('/', (req, res) => {
-  const sql = 'SELECT * FROM email';
+  const ultimos = req.query.ultimos
+  let sql = 'SELECT * FROM email';
+  if (ultimos){
+    sql += ` ORDER BY id DESC LIMIT ${ultimos}`
+  }
   db.query(sql, (err, result) => {
     if (err) {
       throw err;
